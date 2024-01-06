@@ -1,12 +1,16 @@
 <template>
   <div class="container">
     <div class="h3 mb2">Spot liquidation calculator</div>
-    <b-input-group prepend="total liability" class="mb-2">
+    <b-input-group prepend="total liability" append="USDT" class="mb-2">
           <b-form-input type="number" v-model="liability"></b-form-input>
         </b-input-group>
 
       <div v-for="indexItem in inputsCount" :key="indexItem">   
-        <b-input-group prepend="amount * price | ↑ | ↓" class="mb-2">               
+        <b-input-group class="mb-2">  
+          <template #prepend>
+            <b-input-group-text > ticker (optional) | amount | price | ↑ | ↓ </b-input-group-text>
+          </template>             
+          <b-form-input type="text"></b-form-input>
           <b-form-input v-model="amounts[indexItem]" type="number"></b-form-input>
           <b-form-input v-model="prices[indexItem]" type="number"></b-form-input> 
           <b-form-input v-model="pricesChangedLong[indexItem]" type="number" readonly></b-form-input> 
