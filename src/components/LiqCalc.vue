@@ -75,18 +75,18 @@ export default {
     }
   },
   watch: {
-    dropRange(n, o) {      
+    // dropRange(n, o) {      
      
-      for (let i = 1; i <= this.inputsCount; i++){
+    //   for (let i = 1; i <= this.inputsCount; i++){
        
-        if (this.prices[i]) {
-          let p = Number(this.prices[i])
-          console.log(n, o)
-          let initial = (n - o) / 100;
-          console.log(initial, p)
-        } 
-      }
-    }
+    //     if (this.prices[i]) {
+    //       let p = Number(this.prices[i])
+    //      // console.log(n, o)
+    //       let initial = (n - o) / 100;
+    //      // console.log(initial, p)
+    //     } 
+    //   }
+    // }
   },
   computed: {
     ltvLong() {
@@ -97,6 +97,7 @@ export default {
         
         if (p && a) marginBalance += p * a;        
       }
+      marginBalance += Number(this.liability)
       return marginBalance ? ((Number(this.liability) / (marginBalance*Number(this.conversionRatio)))*100).toFixed(2) : 0;
     },
     ltvShort() {
@@ -107,6 +108,7 @@ export default {
         
         if (p && a) marginBalance += p * a;        
       }
+      marginBalance += Number(this.liability)
       return marginBalance ? ((Number(this.liability) / (marginBalance*Number(this.conversionRatio)))*100).toFixed(2) : 0;
     },
     pricesChangedLong() {

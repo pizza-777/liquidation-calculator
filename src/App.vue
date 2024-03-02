@@ -1,16 +1,18 @@
 <template>
   <div id="app">
-    <LiqCalc msg="Welcome to Your Vue.js App"/>
+    <liq-calc/>
+    <btc-leverage style="margin-top: 5rem"/>
   </div>
 </template>
 
 <script>
 import LiqCalc from './components/LiqCalc.vue'
-
+import BtcLeverage from "./components/BtcLeverage.vue"
 export default {
   name: 'App',
   components: {
-    LiqCalc
+    LiqCalc,
+    BtcLeverage
   }
 }
 </script>
