@@ -8,13 +8,13 @@
       <div v-for="indexItem in inputsCount" :key="indexItem">   
         <b-input-group class="mb-2">  
           <template #prepend>
-            <b-input-group-text > ticker (optional) | amount | price | ↑ | ↓ </b-input-group-text>
+            <b-input-group-text > ticker (optional) | amount | price </b-input-group-text>
           </template>             
           <b-form-input type="text"></b-form-input>
           <b-form-input v-model="amounts[indexItem]" type="number"></b-form-input>
           <b-form-input v-model="prices[indexItem]" type="number"></b-form-input> 
-          <b-form-input v-model="pricesChangedLong[indexItem]" type="number" readonly></b-form-input> 
-          <b-form-input v-model="pricesChangedShort[indexItem]" type="number" readonly></b-form-input> 
+          <!-- <b-form-input v-model="pricesChangedLong[indexItem]" type="number" readonly></b-form-input> 
+          <b-form-input v-model="pricesChangedShort[indexItem]" type="number" readonly></b-form-input>  -->
           <b-input-group-append>
             <b-button @click="addField" text="Add" variant="success">+</b-button>
           </b-input-group-append>
@@ -38,12 +38,12 @@
       </template>
       <b-form-input type="range" v-model="dropRange" min="0" max="100"></b-form-input>
     </b-input-group>
-    <b-input-group prepend="LTV Long" append="%" class="mb-2">
+    <b-input-group prepend="LTV" append="%" class="mb-2">
       <b-form-input :value="ltvLong" readonly></b-form-input>
     </b-input-group>
-    <b-input-group prepend="LTV Short" append="%" class="mb-2">
+    <!-- <b-input-group prepend="LTV Short" append="%" class="mb-2">
       <b-form-input :value="ltvShort" readonly></b-form-input>
-    </b-input-group>
+    </b-input-group> -->
   </div>
 </template>
 
@@ -96,8 +96,7 @@ export default {
         let a = Number(this.amounts[i]);
         
         if (p && a) marginBalance += p * a;        
-      }
-      marginBalance += Number(this.liability)
+      }      
       return marginBalance ? ((Number(this.liability) / (marginBalance*Number(this.conversionRatio)))*100).toFixed(2) : 0;
     },
     ltvShort() {
@@ -108,7 +107,7 @@ export default {
         
         if (p && a) marginBalance += p * a;        
       }
-      marginBalance += Number(this.liability)
+      
       return marginBalance ? ((Number(this.liability) / (marginBalance*Number(this.conversionRatio)))*100).toFixed(2) : 0;
     },
     pricesChangedLong() {

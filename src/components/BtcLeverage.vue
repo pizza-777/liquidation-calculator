@@ -12,14 +12,14 @@
     <div v-for="indexItem in inputsCount" :key="indexItem">
       <b-input-group class="mb-2">
         <template #prepend>
-          <b-input-group-text> ticker (optional) | amount | price | USDT | ↑ | ↓ </b-input-group-text>
+          <b-input-group-text> ticker (optional) | amount | price </b-input-group-text>
         </template>
         <b-form-input type="text"></b-form-input>
         <b-form-input v-model="amounts[indexItem]" type="number"></b-form-input>
         <b-form-input v-model="prices[indexItem]" type="number"></b-form-input>
-        <b-form-input v-model="pricesChangedLong[indexItem]" type="number" readonly></b-form-input>
-        <b-form-input v-model="pricesChangedShort[indexItem]" type="number" readonly></b-form-input>
-        <b-form-input :value="amounts[indexItem] * prices[indexItem]" type="number" readonly></b-form-input>
+        <!-- <b-form-input v-model="pricesChangedLong[indexItem]" type="number" readonly></b-form-input> -->
+        <!-- <b-form-input v-model="pricesChangedShort[indexItem]" type="number" readonly></b-form-input>
+        <b-form-input :value="amounts[indexItem] * prices[indexItem]" type="number" readonly></b-form-input> -->
         <b-input-group-append>
           <b-button @click="addField" text="Add" variant="success">+</b-button>
         </b-input-group-append>
@@ -34,7 +34,7 @@
       <template #prepend>
         <b-input-group-text> ticker (optional) | BTC Debt | price </b-input-group-text>
       </template>
-      <b-form-input type="text" value="BTC"></b-form-input>
+      <b-form-input type="text" value="BTC" readonly></b-form-input>
       <b-form-input v-model="BTCDebtamount" type="number"></b-form-input>
       <b-form-input v-model="BTCprice" type="number"></b-form-input>
 
@@ -116,7 +116,7 @@ export default {
         if (p && a) marginBalance += p * a;
       }
       const liability = Number(this.otherLiability) + Number(this.BTCprice * this.BTCDebtamount)
-      marginBalance += liability
+     // marginBalance += liability
       return marginBalance ? ((Number(liability) / (marginBalance * Number(this.conversionRatio))) * 100).toFixed(2) : 0;
     },
     ltvShort() {
